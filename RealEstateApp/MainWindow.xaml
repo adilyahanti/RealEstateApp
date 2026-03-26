@@ -1,0 +1,96 @@
+﻿<Window x:Class="RealEstateApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RealEstateApp"
+        mc:Ignorable="d"
+        Title="Учёт реализации квартир" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+            <Button x:Name="btnUserManagement" Content="Управление пользователями" Width="200" Margin="0,0,10,0" Click="UserManagement_Click" Visibility="Collapsed"/>
+            <Button Content="Выход" Width="80" Click="Logout_Click"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Квартиры">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="Добавить" Width="80" Margin="0,0,10,0" Click="AddApartment_Click"/>
+                        <Button Content="Редактировать" Width="80" Margin="0,0,10,0" Click="EditApartment_Click"/>
+                        <Button Content="Удалить" Width="80" Click="DeleteApartment_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="dgApartments" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Номер дома" Binding="{Binding BuildingNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Номер квартиры" Binding="{Binding ApartmentNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Комнат" Binding="{Binding Rooms}" Width="Auto"/>
+                            <DataGridTextColumn Header="Площадь" Binding="{Binding Area}" Width="Auto"/>
+                            <DataGridTextColumn Header="Этаж" Binding="{Binding Floor}" Width="Auto"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Клиенты">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="Добавить" Width="80" Margin="0,0,10,0" Click="AddClient_Click"/>
+                        <Button Content="Редактировать" Width="80" Margin="0,0,10,0" Click="EditClient_Click"/>
+                        <Button Content="Удалить" Width="80" Click="DeleteClient_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="dgClients" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="*"/>
+                            <DataGridTextColumn Header="Паспортные данные" Binding="{Binding PassportData}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Продажи">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="Добавить" Width="80" Margin="0,0,10,0" Click="AddSale_Click"/>
+                        <Button Content="Редактировать" Width="80" Margin="0,0,10,0" Click="EditSale_Click"/>
+                        <Button Content="Удалить" Width="80" Click="DeleteSale_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="dgSales" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                            <DataGridTextColumn Header="Квартира" Binding="{Binding Apartments.BuildingNumber, StringFormat='Дом {0}'}" Width="*"/>
+                            <DataGridTextColumn Header="Квартира" Binding="{Binding Apartments.ApartmentNumber, StringFormat='Кв. {0}'}" Width="*"/>
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Clients.FullName}" Width="*"/>
+                            <DataGridTextColumn Header="Дата продажи" Binding="{Binding SaleDate, StringFormat=d}" Width="*"/>
+                            <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat=C}" Width="*"/>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
